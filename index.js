@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const userRoute = require("./routes/user");
 const expenseRoute = require("./routes/expense");
+const adminRoute = require("./routes/admin");
+const customerRoute = require("./routes/customers");
 const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
@@ -30,7 +32,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // ROUTES
 app.use("/api/user", userRoute);
 app.use("/api/expense", expenseRoute);
+app.use("/api/admin", adminRoute);
+app.use("/api/customer", customerRoute);
 // START SERVER
 app.listen(process.env.PORT, () => {
-  console.log("Server is running!");
+  console.log(`Sever is up on port: ${process.env.PORT}`);
 });

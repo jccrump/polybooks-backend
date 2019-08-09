@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-const expensePaymentSchema = require('./expensePaymentSchema')
-const expenseApprovalStatusSchema = require('./expenseApprovalStatusModel')
+const mongoose = require("mongoose");
+const expensePaymentSchema = require("./expensePaymentSchema");
+const expenseApprovalStatusSchema = require("./expenseApprovalStatusModel");
 
-let expenseSchema = mongoose.Schema({
+let expenseSchema = mongoose.Schema(
+  {
     project_id: String,
     vendor_id: String,
     status: String,
@@ -11,21 +12,14 @@ let expenseSchema = mongoose.Schema({
     amount_due: Number,
     payments: [expensePaymentSchema],
     total_paid: Number,
-    approval_status: {
-        status: String,
-        date: String
-    },
-    filing_status: {
-        status: String,
-        location: String,
-        date: String
-    },
-    reconcile_status: {
-        status: String,
-        date: String
-    }
-}, {collection: 'expenses'})
+    approval_status: String,
+    filing_status: String,
+    reconcile_status: String,
+    notes: Array
+  },
+  { collection: "expenses" }
+);
 
-let expenseModel = mongoose.model('expenses', expenseSchema);
+let expenseModel = mongoose.model("expenses", expenseSchema);
 
-module.exports = expenseModel
+module.exports = expenseModel;

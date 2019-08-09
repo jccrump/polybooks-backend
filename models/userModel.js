@@ -5,10 +5,11 @@ let userSchema = mongoose.Schema(
     company_id: String,
     first_name: String,
     last_name: String,
+    phone: Number,
+    role: String,
     email: String,
     password: String,
-    user_type: String,
-    access_allowed: Boolean
+    access_allowed: String
   },
   { collection: "users" }
 );

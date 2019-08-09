@@ -1,16 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-let customerSchema = mongoose.Schema({
+let customerSchema = mongoose.Schema(
+  {
+    company_id: String,
     first_name: String,
     last_name: String,
     street_address: String,
+    project_manager: String,
     city: String,
     zip: String,
-    company_name: String,
     phone: String,
     email: String
-}, {collection: 'customers'})
+  },
+  { collection: "customers" }
+);
 
-let customerModel = mongoose.model('customers', customerSchema);
+let customerModel = mongoose.model("customers", customerSchema);
 
-module.exports = customerModel
+module.exports = customerModel;

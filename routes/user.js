@@ -9,6 +9,10 @@ const verifyToken = require("../helpers/verifyToken");
 const dotenv = require("dotenv");
 dotenv.config();
 
+router.get("/field", verifyToken, (req, res) => {
+  userModel.find({ role: "Field" }).then(response => res.send(response));
+});
+
 router.post("/login", (req, res) => {
   console.log(req.body);
   userModel
@@ -35,7 +39,20 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/register", verifyToken, (req, res) => {
-  res.json({ message: "It works" });
+  bcrypt
+    .hash(req.body.password, saltRounds)
+    .then(function(hash) {
+      req.body.password = hash;
+      req.body.company_id = req.user.user.company_id;
+      let user = {
+        ...req.body
+      };
+      console.log(user);
+      let data = new userModel(user);
+      data.save();
+      res.json({ message: "It works" });
+    })
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
